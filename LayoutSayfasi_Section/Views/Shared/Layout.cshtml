@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Layout</title>
+    <style>
+        body {
+            margin:0px;
+        }
+        #sayfa {
+            width:900px;
+            margin:0 auto;
+        }
+        #ust {
+            height:50px;
+            background-color:#ff6a00;
+        }
+        #orta {
+            height:350px;
+            background-color:#b200ff;
+        }
+        #alt {
+            height:100px;
+            background-color:#4800ff;
+        }
+    </style>
+</head>
+<body>
+    <div id="sayfa"> 
+        <div id="ust">
+            <!-- Url.Action(<Action İsmi> , <Controller İsmi>)  çıktısı => <Controller İsmi>/<Action İsmi> Home/Index şeklindedir. -->
+            <a href="@Url.Action("Index","Home")">Anasayfa</a>
+            <a href="@Url.Action("Sayfa2","Home")">Sayfa2</a>
+            <a href="@Url.Action("Sayfa3","Home")">Sayfa3</a>
+        </div>
+
+        <div id="orta">
+            @RenderBody() <!-- Layout sayfasından birden fazla RenderBody olamaz. -->
+        </div>
+
+        <div id="alt">
+            <!--
+            Section(Bölge): Sayfa içerisinde herhangi bir alan içerisinde yazılan kodların Layout içerisinde belirtilen alanda(ayırılan bölgede) görüntülenmesini sağlar .
+            -->
+            <!-- Bu kısım sayfaya göre farklılık gösterecektir. -->
+            @* @if (IsSectionDefined("icerik")) // IsSectionDefined("sectionAdi") verilen section adı Okunan sayfada varsa render et yoksa bir şey yapma.
+            {
+                @RenderSection("icerik")
+            }*@
+
+            @RenderSection("icerik",false)
+        </div>
+    </div>
+</body>
+</html>
